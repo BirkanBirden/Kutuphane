@@ -1,0 +1,96 @@
+<div class="container">
+  <p>
+    <button mat-fab color="primary" [routerLink]="['/kutuphane']" matTooltip="Kütüphaneler">
+      <mat-icon aria-label="label">arrow_back</mat-icon>
+    </button> &nbsp;
+    <mat-cell *matCellDef="let kayit">
+      <button mat-fab color="primary" [routerLink]="['/saatdetay',kayit.kutuphaneId]" matTooltip="Saatleri Görüntüle">
+        <mat-icon aria-label="label">article</mat-icon>
+
+      </button>
+    </mat-cell>
+
+
+
+  </p>
+  <p>&nbsp;</p>
+
+
+  <h1>Üye Liste</h1>
+
+
+  <h3><b>Kütüphane Adı : </b> {{secKutup?.kutuphaneIsim}}</h3>
+
+  <p>
+    <mat-form-field appearance="outline" style="width : 50%">
+
+      <mat-label>Üye Seçiniz</mat-label>
+
+      <mat-select placeholder="Üye Seçiniz" (selectionChange)="UyeSec($event.value)">
+
+        <mat-option [value]="uye.uyeId" *ngFor="let uye of uyeler">{{uye.uyeAdSoyad}}</mat-option>
+
+      </mat-select>
+
+    </mat-form-field> &nbsp;
+
+    <button mat-fab matTooltip="Üye Ekle" (click)="UyeEkle()">
+      <mat-icon aria-label="label">add</mat-icon>
+    </button>
+  </p>
+  <p>&nbsp;</p>
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="uyeAdSoyad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye İsmi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyebilgi.uyeAdSoyad}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="uyeTelNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Tel
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyebilgi.uyeTelNo}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="uyeMail">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üye Mail
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyebilgi.uyeMail}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+
+        <button mat-icon-button color="warn" matTooltip="Ders Kaydını Sil" (click)="UyeSil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" [routerLink]="['/saatdetay',kayit.kutuphaneId]"
+          matTooltip="Saatleri Görüntüle">
+          <mat-icon aria-label="label">article</mat-icon>
+
+        </button>
+
+
+      </mat-cell>
+
+      <mat-cell *matCellDef="let kayit">
+
+      </mat-cell>
+
+
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

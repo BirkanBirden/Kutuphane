@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+
+<div class="container">
+
+  <form [formGroup]="frm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Kütüphane İsim</mat-label>
+      <input matInput placeholder="Kutuphane İsim" formControlName="kutuphaneIsim" name="kutuphaneIsim" required
+        type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Kütüphane Tel</mat-label>
+      <input matInput placeholder="Kütüphane Tel" formControlName="kutuphaneTel" name="kutuphaneTel" required
+        type="number" placeholder="0(500) 000 00 00">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Kütüphane Mail</mat-label>
+      <input matInput placeholder="Kütüphane Mail" formControlName="kutuphaneMail" name="kutuphaneMail" required
+        type="text" placeholder="merhaba@örnek.com">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Kütüphane Şifre</mat-label>
+      <input matInput placeholder="Kütüphane Şifre" formControlName="kutuphanesifre" name="kutuphanesifre" required
+        type="text">
+    </mat-form-field>
+
+  </form>
+
+  <button mat-raised-button color="primary" [disabled]="frm.invalid" (click)="dialog.close(frm.value)">Kaydet</button>
+
+  &nbsp;
+
+  <button mat-raised-button color="warn" (click)="dialog.close()"> İptal </button>
+
+
+</div>
